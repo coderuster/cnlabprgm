@@ -1,24 +1,24 @@
-import subprocess
+import requests
 
 def get_cmd(name,number):
-    return f"Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/coderuster/cnlabprgm/main/{number}/{name}' -OutFile '{name}'"
+    return f"https://raw.githubusercontent.com/coderuster/cnlabprgm/main/{number}/{name}"
 
-def run_powershell(cmd): 
-    process = subprocess.run(["powershell", "-Command", cmd], capture_output=True)
-    if process.returncode == 0:
-      output = process.stdout.decode()
-      print(f"List of Chrome processes:\n{output}")
-    else:
-      error = process.stderr.decode()
-      print(f"Error: {error}")
-
+def run_command(cmd):
+  try:
+      data=requests.get(cmd)
+      return data.text
+  except Exception as e:
+    print(f"Error: {e}")
+    return "ERROR"
 
 def main():
     number=input("Enter the experiment number: ").strip()
-    cmd1=get_cmd("server.py",number)
-    cmd2=get_cmd("client.py",number)
-    run_powershell(cmd1)
-    run_powershell(cmd2)
-
+    files=["server.py","client.py"]
+    for f in files:
+        cmd1=get_cmd(f,number)
+        content=run_command(cmd1)
+        with open(f,"w") as file:
+            file.write(content)
 if __name__=="__main__":
     main()
+
