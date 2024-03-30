@@ -1,0 +1,61 @@
+1 ) write a simple HTTP web client program
+using TCP Sockets to download a web page .
+Get the URL and pass it for buffering
+the content and Write it as a html
+file and make it to get downloaded .
+
+2 ) write a program to implement echo client
+and echo Server using TCP Sockets . This client /
+Serves pair runs a simple TCP socket program
+as an Echo Server that allows one/more
+client ho connect to the server .
+
+3 ) write a program to implement inter process .
+Communication ( chat ) using stream sockets with
+the help of Socket interface provided TCP
+Sockets .
+
+4 ) write a file server program using TCP
+Sockets . The Server sends A reply to the user
+with the files specified file needs to be
+downloaded . If the file does not exist , error
+message needs to be displayed from the server .
+
+5 ) write a program to implement
+using UDP the DNS Sockets . The DNS Should have
+different domains with corresponding IP
+addresses . Resolve the user given domain with
+the IP and display it to the user . Also indicate
+the error message to the user when domain
+is not resolved .
+
+6 ) write a program to implement ARP / RARP
+protocols .
+
+7.Write a program to implement distance vector routing algorithm and illustrate path taken for sending the packets from source to destination.
+
+8. Write a program to implement link state
+routing algorithm and illustrate path
+taken for rending the packet from source to
+destination
+
+9.Write a program to implement CRC Error
+detection technique	
+
+10.Write the use of the following network
+commands and simulate it to show its output
+with PDUs
+ tcpdump
+ netstat
+ ifconfig
+ nslookup
+ traceroute 
+11(7).Write any one congestion control mechanisms 
+and simulate the functionalities using
+network simulator .
+
+12.Write illustration of any two routing protocols with the network nodes/hop from a sender to receiver with atleast four to five computing nodes and simulate it in the 
+
+13(8).Write the study of TCP/UDP performance and show it usong any one simulation tool.
+
+14.Write the performance evaluation of any simulation tool.
