@@ -18,14 +18,17 @@ def crc_encode(data,divisor):
 def crc_check(data,divisor):
     return crc_remainder(data,divisor)==0
 
-data=b"hello"
+data=b"h"
 divisor=0x9C
+print("data:",bin(ord("h"))[2:])
+print("divisor:",bin(divisor)[2:])
 
 encoded= crc_encode(data,divisor)
-print(f"Encoded: {encoded}")
+bin_data=bin(int.from_bytes(encoded,"big"))[2:]
+print(f"Encoded: {bin_data}")
 
 corrupted_data=bytearray(encoded)
-corrupted_data[2]=0xff
+corrupted_data[0]=0xff
 
 crc_valid=crc_check(corrupted_data,divisor)
 
