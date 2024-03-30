@@ -1,4 +1,5 @@
 import socket
+import os
 
 def main():
     server=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -9,10 +10,14 @@ def main():
         data=client.recv(1024)
         f_name=data.decode()
         try:
-            print(f_name)
-            with open("test.txt",'rb') as f:
-                data=f.read()
-                client.send(data)
+            if not os.path.exists(f_name):
+                continue
+            with open(f_name,'rb') as f:
+                while True:
+                        chunk = f.read(1024)
+                        if not chunk:
+                            break
+                        client.sendall(chunk)
         except:
             client.send('File not found'.encode())
 
