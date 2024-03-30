@@ -1,13 +1,30 @@
 import socket
 import ssl
+import urllib.request
+import json
 
 def get_cmd(name,number):
     return f"raw.githubusercontent.com/coderuster/cnlabprgm/main/{number}/{name}"
+
+
+def get_files(repo_url, folder_path):
+    api_url = f"{repo_url.rstrip('/')}/contents/{folder_path}"
+    ret=[]
+    with urllib.request.urlopen(api_url) as response:
+        if response.getcode() == 200:
+            contents = json.loads(response.read())
+            
+            for item in contents:
+                if item["type"] == "file":
+                    filename = item["name"]
+                    ret.append(filename)
+        else:
+            print(f"Failed to fetch folder contents. Status code: {response.getcode()}")
+    return ret
 def https_get(url):
     hostname, _, path = url.partition('/')
     if not path:
         path = '/'
-
     with socket.create_connection((hostname, 443)) as sock:
         context = ssl.create_default_context()
         with context.wrap_socket(sock, server_hostname=hostname) as ssock:
@@ -33,7 +50,9 @@ def run_command(cmd):
 
 def main():
     number=input("Enter the experiment number: ").strip()
-    files=["server.py","client.py"]
+    repo_url = "https://api.github.com/repos/coderuster/cnlabprgm/"
+    files=get_files(repo_url,number)
+    # files=["server.py","client.py"]
     for f in files:
         cmd=get_cmd(f,number)
         content=run_command(cmd)
